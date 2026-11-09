@@ -93,7 +93,7 @@ function M.jump(picker, _, action)
   local first_buf ---@type number
   for _, item in ipairs(items) do
     local buf = item.buf ---@type number
-    if not buf then
+    if not (buf and vim.api.nvim_buf_is_valid(buf)) then
       local path = assert(Snacks.picker.util.path(item), "Either item.buf or item.file is required")
       buf = vim.fn.bufadd(path)
     end
